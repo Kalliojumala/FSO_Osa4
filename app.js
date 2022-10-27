@@ -1,4 +1,5 @@
 const express = require('express')
+
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -6,6 +7,7 @@ const mongoose = require('mongoose')
 const config = require('./utils/config')
 const mongoUrl = config.mongoUrl || "localhost:3001/"
 
+const errorHandler = require('./utils/middleware')
 const logger = require('./utils/logger')
 
 mongoose.connect(mongoUrl).then(() => {
@@ -16,7 +18,7 @@ mongoose.connect(mongoUrl).then(() => {
 
 app.use(cors())
 app.use(express.json())
-
+app.use(errorHandler)
 const blogRouter = require('./controllers/blogs')
 app.use(blogRouter)
 
