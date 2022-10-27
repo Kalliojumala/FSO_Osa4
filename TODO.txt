@@ -17,8 +17,14 @@ Part 4a DONE
     Refactor route for async/await DONE
 
 4.11
-    If new BlogObject.likes == undefined, set it to 0
-    Test feature
+    If new BlogObject.likes == undefined, set it to 0 DONE
+    Test feature DONE
+
+4.12
+    Require Title and url on new blogObject, return 400 if either is missing DONE
+    Test above DONE
+    
+4.13
     
 
 Part 4c 

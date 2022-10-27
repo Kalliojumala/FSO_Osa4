@@ -88,6 +88,35 @@ describe('HTTP POST', () => {
         }
 
     )
+
+    test('adding blogObject without title or url results in 400',
+        async () => {
+            const blogNoUrl = {
+                title: "Test POST req",
+                author: "None",
+            }
+
+            const blogNoTitle = {
+                author: 'xd',
+                url: 'www.testing.abc'
+            }
+            
+            await api.post('/api/blogs')
+                .send(blogNoUrl)
+                .expect(400)
+
+            await api.post('/api/blogs')
+                .send(blogNoTitle)
+                .expect(400)
+
+            //Check items were not added to database.
+            const result = await api.get('/api/blogs')
+            expect(result.body).toHaveLength(initialData.length)
+
+        }
+    
+    )
+
 })
 
 afterAll(() => {
