@@ -56,7 +56,8 @@ describe('HTTP POST', () => {
                 likes: 0
             }
 
-            await api.post('/api/blogs', newBlog)
+            await api.post('/api/blogs')
+                .send(newBlog)
                 .expect(201)
 
             const getResponse = await api.get('/api/blogs')
@@ -64,6 +65,7 @@ describe('HTTP POST', () => {
                 .expect('Content-Type', /application\/json/)
 
             expect(getResponse.body).toHaveLength(initialData.length + 1)
+            
         }
     )
 
@@ -75,11 +77,13 @@ describe('HTTP POST', () => {
                 url: "None",
             }
 
-            const response = await api.post('/api/blogs', newBlog)
+            const response = await api.post('/api/blogs')
+                .send(newBlog)
                 .expect(201)
 
             expect(response.body.likes).toBeDefined()
             expect(response.body.likes).toBe(0)
+            
 
         }
 
