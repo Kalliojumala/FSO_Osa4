@@ -5,11 +5,21 @@ Part 4a DONE
 
 4.8: 
     Setup test env DONE
-    Test http get request with SuperTest against live MongoDB database DONE
+    Test http get request with SuperTest against live MongoDB DONE
     Refactor get route to use async/await. DONE
 
 4.9
-    Test get returns BlogObjects in correct format. (correct field names etc.)
+    Test get returns BlogObjects in correct format. (correct field names etc.) DONE
+
+
+4.10
+    Test http post request against live MongoDB DONE
+    Refactor route for async/await DONE
+
+4.11
+    If new BlogObject.likes == undefined, set it to 0
+    Test feature
+    
 
 Part 4c 
 

@@ -35,16 +35,38 @@ describe('HTTP GET', () => {
         async () => {
             const response = await api.get('/api/blogs')
                 .expect(200)
-            
+
             response.body.map((blog) => {
                 expect(blog.id).toBeDefined()
-            
+
             })
-            
+
         }
     )
 })
 
+describe('HTTP POST', () => {
+
+    test('http post adds blog entry to database',
+        async () => {
+            const newBlog = {
+                title: "Test POST req",
+                author: "None",
+                url: "None",
+                likes: 0
+            }
+
+            await api.post('/api/blogs', newBlog)
+                .expect(201)
+
+            const getResponse = await api.get('/api/blogs')
+                .expect(200)
+                .expect('Content-Type', /application\/json/)
+
+            expect(getResponse.body).toHaveLength(initialData.length + 1)
+        }
+    )
+})
 
 afterAll(() => {
     mongoose.connection.close()
