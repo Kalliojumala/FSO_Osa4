@@ -66,6 +66,24 @@ describe('HTTP POST', () => {
             expect(getResponse.body).toHaveLength(initialData.length + 1)
         }
     )
+
+    test('adding blogObject without "likes" field creates field with value 0',
+        async () => {
+            const newBlog = {
+                title: "Test POST req",
+                author: "None",
+                url: "None",
+            }
+
+            const response = await api.post('/api/blogs', newBlog)
+                .expect(201)
+
+            expect(response.body.likes).toBeDefined()
+            expect(response.body.likes).toBe(0)
+
+        }
+
+    )
 })
 
 afterAll(() => {
