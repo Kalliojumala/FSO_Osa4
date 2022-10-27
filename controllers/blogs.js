@@ -1,12 +1,9 @@
 const blogRouter = require('express').Router()
 const Blog = require('../models/blog_schema')
 
-blogRouter.get('/api/blogs', (request, response) => {
-    Blog
-      .find({})
-      .then(blogs => {
-        response.json(blogs)
-      })
+blogRouter.get('/api/blogs', async (request, response) => {
+    const blogEntries = await Blog.find({})
+    response.json(blogEntries)
   })
   
 
