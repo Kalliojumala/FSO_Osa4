@@ -1,4 +1,16 @@
-part 4a DONE
-part 4b
-part 4c 
-part 4d
+Part 4a DONE
+
+
+
+
+4.8: 
+    Setup test env DONE
+    Test http get request with SuperTest against live MongoDB database DONE
+    Refactor get route to use async/await. DONE
+
+
+
+Part 4c 
+
+
+Part 4d
