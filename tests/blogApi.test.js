@@ -143,6 +143,38 @@ describe('HTTP DELETE', () => {
     })
 })
 
+describe('HTTP PUT', () => {
+    test('Add and subtract like value correctly if blogId exists', async () => {
+        const id = initialData[0]._id
+        const URI = `/api/blogs/${id}`
+
+        //Add like
+        await api.put(URI).send({"likes": 1}).expect(200)
+        var result = await api.get(URI)
+        expect(result.body.likes).toEqual(initialData[0].likes + 1)
+
+        //Substract like
+        await api.put(URI).send({"likes": -1}).expect(200)
+        var result = await api.get(URI)
+        expect(result.body.likes).toEqual(initialData[0].likes)
+
+    })
+
+    test('error handling (incorrect id or like value)', async () => {
+        const wrongId = "MadeUPId"
+        const wrongURI = `/api/blogs/${wrongId}`
+        const id = initialData[0]._id
+        const URI = `/api/blogs/${id}`
+
+        //Document does not exist
+        await api.put(wrongURI).send({"likes" : 1}).expect(500)
+
+        //Only modify value by one per request
+        await api.put(URI).send({"likes": 10}).expect(400)
+
+    })
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
