@@ -19,7 +19,10 @@ mongoose.connect(mongoUrl).then(() => {
 app.use(cors())
 app.use(express.json())
 app.use(errorHandler)
+
+const userRouter = require('./controllers/users')
 const blogRouter = require('./controllers/blogs')
+app.use(userRouter)
 app.use(blogRouter)
 
 module.exports = app

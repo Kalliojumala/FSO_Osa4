@@ -32,7 +32,10 @@ Part 4a DONE
     Add feature to modify single blog post (update Likes) DONE
     Test feature DONE
 
-Part 4c 
+4.15
+    Add users (POST) (name, password, usrname). Password must be encrypted. DONE
+    Get users should return json of users (but not passwords). DONE
+    
 
 
 Part 4d
