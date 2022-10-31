@@ -6,14 +6,14 @@ const {noBlogs, singleBlog, blogsMultiple} = require('./testData')
 
 describe('most blogs', () => {
     test('return undefined for no entries', () => {
-        result = mostBlogs(noBlogs)
+        const result = mostBlogs(noBlogs)
         expect(result).toBe(undefined)
     })
 
 
     //Single blog entry
-    test('return correct object {author: x, blogs:y}', () => {
-        mostBlogsExpected = {
+    test('return correct object, single entry', () => {
+        const mostBlogsExpected = {
             author: 'unknown',
             blogs: 1
         }
@@ -22,12 +22,12 @@ describe('most blogs', () => {
     })
 
     //Multiple
-    test('return correct object {author: x, blogs:y}', () => {
-        mostBlogsExpected = {
+    test('return correct object from multiple blogs', () => {
+        const mostBlogsExpected = {
             author: 'Robert C. Martin',
             blogs: 3
         }
-        result = mostBlogs(blogsMultiple)
+        const result = mostBlogs(blogsMultiple)
         expect(result).toEqual(mostBlogsExpected)
     })
 })
