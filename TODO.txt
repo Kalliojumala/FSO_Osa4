@@ -29,7 +29,8 @@ Part 4a DONE
     Test feature DONE
     
 4.14
-    
+    Add feature to modify single blog post (update Likes) DONE
+    Test feature DONE
 
 Part 4c 
 
