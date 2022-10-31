@@ -119,6 +119,30 @@ describe('HTTP POST', () => {
 
 })
 
+describe('HTTP DELETE', () => {
+
+    test('delete item from database if requested id exists', async () => {
+        const id = initialData[0]._id
+        const URI = `/api/blogs/${id}`
+        await api.delete(URI).expect(204)
+
+        const result = await api.get('/api/blogs')
+        expect(result.body).toHaveLength(initialData.length - 1)
+
+        result.body.map((blog) => {
+            expect(blog.id === id).toBe(false)
+        })
+        
+    })
+
+    test('delete request with non-existent id returns 500 but does not crash', async () => {
+        const id = 'ThisIdDoesNotExist'
+        const URI = `/api/blogs/${id}`
+        await api.delete(URI).expect(500)
+        await api.get('/api/blogs').expect(200)
+    })
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })

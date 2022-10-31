@@ -6,28 +6,28 @@ const {noBlogs, singleBlog, blogsMultiple} = require('./testData')
 
 describe('most likes', () => {
     test('return undefined for no entries', () => {
-        result = mostLikes(noBlogs)
+        const result = mostLikes(noBlogs)
         expect(result).toBe(undefined)
     })
 
 
     //Single blog entry
-    test('return correct object {author: x, Likes:y}', () => {
-        mostLikesExpected = {
+    test('return correct object}', () => {
+        const mostLikesExpected = {
             author: 'unknown',
             likes: 5
         }
-        result = mostLikes(singleBlog)
+        const result = mostLikes(singleBlog)
         expect(result).toEqual(mostLikesExpected)
     })
 
     //Multiple
-    test('return correct object {author: x, Likes:y}', () => {
-        mostLikesExpected = {
+    test('return correct object from multiple', () => {
+        const mostLikesExpected = {
             author: 'Edsger W. Dijkstra',
             likes: 17
         }
-        result = mostLikes(blogsMultiple)
+        const result = mostLikes(blogsMultiple)
         expect(result).toEqual(mostLikesExpected)
     })
 })

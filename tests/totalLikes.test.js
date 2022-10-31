@@ -17,8 +17,8 @@ describe('total likes', () => {
 
     //Test multiple items
     test('likes of a bigger list are summed correctly', () => {
-    result = totalLikes(blogsMultiple)
-    expect(result).toBe(36)
+        const result = totalLikes(blogsMultiple)
+        expect(result).toBe(36)
     })
 
 })

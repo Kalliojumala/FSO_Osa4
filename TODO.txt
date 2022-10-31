@@ -25,6 +25,10 @@ Part 4a DONE
     Test above DONE
     
 4.13
+    Add feature to remove a single blog post (REST) DONE
+    Test feature DONE
+    
+4.14
     
 
 Part 4c 
