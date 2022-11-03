@@ -42,5 +42,10 @@ Part 4a DONE
     creation requests. DONE
     Tests. DONE
 
+4.17 
+    Blogs should be connected to users/writers by id. DONE
+    Get request to blogs should display the blogs writer and vice versa. DONE
+
+
 
 Part 4d
