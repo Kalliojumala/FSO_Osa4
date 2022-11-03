@@ -4,21 +4,24 @@ const bcrypt = require('bcryptjs')
 
 const createUser = async ({ name, username, password, message }) => {
     
-    if(username.length < 3 || password.length < 3) {
-        return [false, "Field minlength is 3"]
-    }
-
+    //Validations
     if (password === undefined || username === undefined) {
         return [false, "Username and password are required"]
     }
 
-    var userNameInUse =  await User.findOne({'username': username})
+    if(username.length < 3 || password.length < 3) {
+        return [false, "Field minlength is 3"]
+    }
+
+    var userNameInUse = await User.findOne({'username': username})
 
     if(userNameInUse) {
         
         return [false, "Username already in use!"]
     }
 
+
+    //Password encryption
     var salt = await bcrypt.genSalt(10)
     var hash = await bcrypt.hash(password, salt)
 
@@ -34,7 +37,7 @@ const createUser = async ({ name, username, password, message }) => {
 }
 
 userRouter.get('/api/users', async (request, response) => {
-    const users = await User.find({})
+    const users = await User.find({}).populate('blogs', {title: 1, url: 1, likes: 1})
     response.status(200).json(users)
 })
 

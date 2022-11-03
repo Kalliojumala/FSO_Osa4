@@ -1,23 +1,51 @@
 const blogRouter = require('express').Router()
 const Blog = require('../models/blog_schema')
+const User = require('../models/user_schema')
 
 blogRouter.get('/api/blogs', async (request, response) => {
-  const blogEntries = await Blog.find({})
+  
+  const blogEntries = await Blog.find({}).populate('user', {username : 1, name: 1})
   response.json(blogEntries)
 })
 
 blogRouter.get('/api/blogs/:id', async (request, response) => {
-  const blogEntry = await Blog.findById({_id: request.params.id})
+  const blogEntry = await Blog.findById({_id: request.params.id}).populate('user', {username : 1, name: 1})
   response.json(blogEntry)
 })
 
-blogRouter.post('/api/blogs', async (request, response, next) => {
-  if (!request.body.title || !request.body.url) {
+blogRouter.post('/api/blogs', async (request, response) => {
+
+  const body = request.body
+  
+  if(!body.userId) {
+    var firstUser = await User.findOne({})
+    var userId = firstUser.id
+  }
+  else {
+    var userId = body.userId
+  }
+
+  if (!body.title || !body.url) {
     response.status(400).json("Title and url are required")
   }
   else {
-    const blog = new Blog(request.body)
+    const user = await User.findById(userId)
+
+    const blog = new Blog({
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: body.likes ? body.likes : 0,
+      user: user._id
+    })
+
+    //Save new blog
     const result = await blog.save()
+
+    //Save new blog id to its user/creator
+    user.blogs = user.blogs.concat(result._id)
+    await user.save()
+
     response.status(201).json(result)
   }
 })
