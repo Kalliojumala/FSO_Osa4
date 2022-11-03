@@ -22,7 +22,9 @@ app.use(errorHandler)
 
 const userRouter = require('./controllers/users')
 const blogRouter = require('./controllers/blogs')
+const loginRouter = require('./controllers/login')
 app.use(userRouter)
 app.use(blogRouter)
+app.use(loginRouter)
 
 module.exports = app

@@ -46,6 +46,7 @@ Part 4a DONE
     Blogs should be connected to users/writers by id. DONE
     Get request to blogs should display the blogs writer and vice versa. DONE
 
-
+4.18
+    Create token authentication/login. DONE 
 
 Part 4d
