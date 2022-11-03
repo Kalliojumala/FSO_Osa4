@@ -2,10 +2,23 @@ const userRouter = require('express').Router()
 const User = require('../models/user_schema')
 const bcrypt = require('bcryptjs')
 
-const createUser = async ({ name, username, password }) => {
-    if (password === undefined || username === undefined) {
-        return false
+const createUser = async ({ name, username, password, message }) => {
+    
+    if(username.length < 3 || password.length < 3) {
+        return [false, "Field minlength is 3"]
     }
+
+    if (password === undefined || username === undefined) {
+        return [false, "Username and password are required"]
+    }
+
+    var userNameInUse =  await User.findOne({'username': username})
+
+    if(userNameInUse) {
+        
+        return [false, "Username already in use!"]
+    }
+
     var salt = await bcrypt.genSalt(10)
     var hash = await bcrypt.hash(password, salt)
 
@@ -15,7 +28,8 @@ const createUser = async ({ name, username, password }) => {
         password: hash
     }
 
-    return newUser
+    //Not a good practice but i felt lazy and it works...
+    return [newUser, `User created: ${username}`]
 
 }
 
@@ -25,14 +39,15 @@ userRouter.get('/api/users', async (request, response) => {
 })
 
 userRouter.post('/api/users', async (request, response) => {
+    
     newUser = await createUser(request.body)
-    if (newUser) {
-        const user = new User(newUser)
+    if (newUser[0]) {
+        const user = new User(newUser[0])
         await user.save()
-        response.status(201).end()
+        response.status(201).json(newUser[1]).end()
     }
     else {
-        response.status(400).end()
+        response.status(400).json(newUser[1]).end()
     }
 })
 
