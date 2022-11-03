@@ -36,6 +36,11 @@ Part 4a DONE
     Add users (POST) (name, password, usrname). Password must be encrypted. DONE
     Get users should return json of users (but not passwords). DONE
     
+4.16
+    Require username and password, min len 3 on both. Usernames must be unique DONE
+    Make sure invalid users are not created and that api responds with proper status code to invalid 
+    creation requests. DONE
+    Tests. DONE
 
 
 Part 4d

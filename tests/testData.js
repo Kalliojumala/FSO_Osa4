@@ -63,4 +63,23 @@ const blogsMultiple = [
     }
 ]
 
-module.exports = {noBlogs, blogsMultiple, singleBlog}
+
+const usersMultiple = [
+    {
+        username: "Kalliojumala",
+        name: "Joel",
+        password: "testi123"
+    },
+    {
+        username: "SniperGod1337",
+        name: "Teppo tulppu",
+        password: "COD4EVER"
+    },
+    {
+        username: "timotei500",
+        name: "Alvar",
+        password: "NauhaRyFanboy"
+    }
+]
+
+module.exports = {noBlogs, blogsMultiple, singleBlog, usersMultiple}
